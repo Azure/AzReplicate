@@ -1,0 +1,10 @@
+dependencies
+| summarize count(), max(timestamp) by tostring(customDimensions._CorrelationId)
+
+traces
+| where message startswith "Worker Starting" or message startswith "Worker Ending"  
+| summarize min(timestamp), max(timestamp) by tostring(customDimensions._CorrelationId)
+
+traces
+| where customDimensions._CorrelationId == "fe190b47-8dd4-4966-bf39-21932e2f2a93"
+| order by timestamp 

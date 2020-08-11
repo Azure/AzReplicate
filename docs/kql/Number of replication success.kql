@@ -1,0 +1,13 @@
+dependencies
+| where name startswith "Replication Success" 
+| where timestamp > todatetime('2020-05-15 10:00:00')
+| summarize ReplicatedSources=sum(tolong(customMeasurements._ReplicatedSources))
+
+dependencies
+| where name startswith "Replication Success" 
+| where timestamp > todatetime('2020-05-15 10:00:00')
+| summarize ReplicatedTiBs=sum(tolong(customMeasurements._ReplicatedBytes)) / pow(1024,4)
+
+
+dependencies
+| summarize min(timestamp)

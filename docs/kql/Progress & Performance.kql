@@ -1,0 +1,40 @@
+customMetrics
+| where name startswith "_" and timestamp > todatetime('2020-05-15 01:00:00')
+| summarize 
+    Value=sum(value), 
+    StartedAt=format_datetime(min(timestamp), 'yyyy-MM-dd hh:mm:ss'), 
+    LastTraceAt=format_datetime(max(timestamp), 'yyyy-MM-dd hh:mm:ss') by name
+| evaluate 
+    pivot(name, sum(Value))
+| project
+    StartedAt,
+    LastTraceAt,
+    ReplicatedSources=_ReplicatedSources,
+    ReplicatedBytes=_ReplicatedBytes,
+    ReplicatedGiBs=_ReplicatedBytes/pow(1024, 3),
+    ReplicatedTiBs=_ReplicatedBytes/pow(1024, 4)
+| summarize 
+    ReplicatedSources=sum(ReplicatedSources), 
+    ReplicatedBytes=sum(ReplicatedBytes),
+    ReplicatedTiBs=sum(ReplicatedTiBs)
+    by StartedAt, LastTraceAt
+| extend 
+    ReplicatedIn=todatetime(LastTraceAt)-todatetime(StartedAt),
+    ReplicatedInSeconds=datetime_diff('second', todatetime(LastTraceAt), todatetime(StartedAt))
+| extend
+    ThroughputInBytes=ReplicatedBytes/ReplicatedInSeconds,
+    ReplicationsPerSecond=ReplicatedSources/ReplicatedInSeconds
+| extend
+    ThroughputInMB=ThroughputInBytes/pow(1024, 2),
+    ThroughputInMbps=ThroughputInBytes/pow(1024, 2) * 8,
+    ThroughputInGB=ThroughputInBytes/pow(1024, 3),
+    ThroughputInGbps=ThroughputInBytes/pow(1024, 3) * 8
+| project
+    ReplicatedSources, 
+    ReplicatedBytes,
+    ReplicatedTiBs,
+    ReplicatedIn,
+    ReplicatedInSeconds,
+    ThroughputInMbps,
+    ThroughputInGbps,
+    ReplicationsPerSecond

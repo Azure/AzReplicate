@@ -1,0 +1,3 @@
+exceptions
+| where type == "AzReplicate.Core.Exceptions.ReplicationFailedException" or outerType == "AzReplicate.Core.Exceptions.ReplicationFailedException"
+| count

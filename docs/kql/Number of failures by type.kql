@@ -1,0 +1,23 @@
+exceptions
+| extend Type=iif(outerMessage startswith "Response status code does not indicate success: BadRequest", "Bad Request", outerMessage) 
+| extend Type=iif(Type startswith "Response status code does not indicate success: InternalServerError (Internal Server Error)", "Internal Server Error", Type)
+| extend Type=iif(Type startswith "Response status code does not indicate success: Conflict (Conflict)", "Conflict", Type)
+| extend Type=iif(Type startswith "Response status code does not indicate success: ServiceUnavailable", "Service Unavailable", Type)
+| extend Type=iif(Type startswith "Response status code does not indicate success: Forbidden", "Forbidden", Type)
+| extend Type=iif(Type startswith "Http transport failure", "Http Failure", Type)
+| extend Type=iif(Type startswith "Response status code does not indicate success: BadGateway", "Bad Gateway", Type)
+| summarize count() by Type
+| render piechart
+
+exceptions
+| where outerMessage  == "Nullable object must have a value."
+| project customDimensions._Source
+
+exceptions
+| where outerMessage startswith "Response status code does not indicate success: BadRequest" 
+| limit 100
+
+exceptions
+| where outerMessage startswith "Response status code does not indicate success: ServiceUnavailable" 
+| order by timestamp desc
+| limit 100

@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "AzReplicate.Sample.WebAppCompleter": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

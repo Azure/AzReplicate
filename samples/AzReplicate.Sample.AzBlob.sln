@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzReplicate.Sample.AzBlobSourcerer", "AzReplicate.Sample.AzBlobSourcerer\AzReplicate.Sample.AzBlobSourcerer.csproj", "{C4F99647-D2BF-4F03-A520-14BEE8820324}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4F99647-D2BF-4F03-A520-14BEE8820324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F99647-D2BF-4F03-A520-14BEE8820324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F99647-D2BF-4F03-A520-14BEE8820324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F99647-D2BF-4F03-A520-14BEE8820324}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DDF94C2-EAE3-4D25-A624-8129106E46A9}
+	EndGlobalSection
+EndGlobal

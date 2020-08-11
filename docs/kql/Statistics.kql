@@ -1,0 +1,19 @@
+dependencies
+| where name startswith "Replication Success"
+| where tolong(customMeasurements._ReplicatedSources) > 0 
+| summarize 
+    ReplicationDuration=max(timestamp) - min(timestamp),
+    ReplicationDurationInSeconds=datetime_diff("Second", max(timestamp), min(timestamp)),
+    ReplicatedSources=sum(tolong(customMeasurements._ReplicatedSources)),
+    ReplicatedTiBs=sum(tolong(customMeasurements._ReplicatedBytes)) / pow(1024, 4),
+    RemainingSources=600000000-sum(tolong(customMeasurements._ReplicatedSources)),
+    RemainingTiBs=1700-sum(tolong(customMeasurements._ReplicatedBytes)) / pow(1024, 4),
+    Progress=(sum(tolong(customMeasurements._ReplicatedBytes)) / pow(1024, 4)/1700)*100
+| project
+    ReplicationDuration,
+    ReplicatedSources,
+    ReplicatedTiBs,
+    RemainingSources,
+    RemainingTiBs,
+    Progress,
+    EstimatedToBeCompletedAt=datetime_add("Second", tolong((RemainingTiBs / (ReplicatedTiBs / ReplicationDurationInSeconds))), now())

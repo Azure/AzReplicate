@@ -1,0 +1,66 @@
+dependencies
+| where name startswith "Replication Success" 
+| where timestamp > todatetime('2020-05-01 00:00:00')
+| order by timestamp desc
+| limit 10
+
+dependencies
+| where name startswith "Replication Success" 
+| where timestamp > todatetime('2020-05-01 00:00:00')
+| summarize sum(tolong(customMeasurements._ReplicatedSources)) by bin(timestamp, 1h)
+| order by bin(timestamp, 1h)
+| render timechart  
+
+dependencies
+| where name startswith "Replication Success" 
+| where timestamp > todatetime('2020-05-01 00:00:00')
+| summarize 
+    ReplicatedSources=sum(tolong(customMeasurements._ReplicatedSources)),
+    ReplicatedGiBs=sum(tolong(customMeasurements._ReplicatedBytes)) / pow(1024, 3),
+    ReplicatedTiBs=sum(tolong(customMeasurements._ReplicatedBytes)) / pow(1024, 4),
+    ReplicationsPerSecond=sum(tolong(customMeasurements._ReplicatedSources)) / 3600,
+    ThroughputInGBps=((sum(tolong(customMeasurements._ReplicatedBytes))) / 3600) / pow(1024, 3),
+    ThroughputInGbps=((sum(tolong(customMeasurements._ReplicatedBytes))) / 3600) / pow(1024, 3) * 8,
+    AverageObjectSizeInMB=sum(tolong(customMeasurements._ReplicatedBytes)) / pow(1024, 2) / sum(tolong(customMeasurements._ReplicatedSources)),
+    LastUpdatedOn=max(timestamp)
+    by bin(timestamp, 1h)
+| order by bin(timestamp, 1h)
+
+dependencies
+| where name startswith "Replication Success" 
+| summarize 
+    ReplicationsPerSecond=sum(tolong(customMeasurements._ReplicatedSources)) / 3600
+    by bin(timestamp, 1h)
+| order by bin(timestamp, 1h)
+| render timechart 
+
+dependencies
+| where name startswith "Replication Success" 
+| summarize 
+    ReplicatedGiBs=sum(tolong(customMeasurements._ReplicatedBytes)) / pow(1024, 3)
+    by bin(timestamp, 1h)
+| order by bin(timestamp, 1h)
+| render timechart 
+
+dependencies
+| where name startswith "Replication Success" 
+| summarize 
+    ReplicatedSources=sum(tolong(customMeasurements._ReplicatedSources))
+    by bin(timestamp, 1h)
+| order by bin(timestamp, 1h)
+| render timechart 
+
+dependencies
+| where name startswith "Replication Success" 
+| summarize 
+    ThroughputInGBps=((sum(tolong(customMeasurements._ReplicatedBytes))) / 3600) / pow(1024, 3),
+    ThroughputInGbps=((sum(tolong(customMeasurements._ReplicatedBytes))) / 3600) / pow(1024, 3) * 8
+    by bin(timestamp, 1h)
+| order by bin(timestamp, 1h)
+| render timechart 
+
+dependencies
+| where name startswith "Replication Success" 
+| where timestamp > todatetime('2020-05-22 23:00:00') and timestamp < todatetime('2020-05-23 00:00:00')
+| summarize ReplicatedSources=sum(tolong(customMeasurements._ReplicatedSources)) by bin(timestamp, 1m)
+| order by timestamp

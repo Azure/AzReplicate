@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "AzReplicate.Sample.AzBlobSourcerer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
