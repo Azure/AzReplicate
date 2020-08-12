@@ -1,3 +1,17 @@
+---
+page_type: sample
+name: AzReplicate
+topic: sample
+description: |
+  AzReplicate is a sample application designed to help Azure Storage customers preform very large, multi-petabyte data migrations to Azure Blob Storage.
+languages:
+  - csharp
+products:
+  - azure
+  - azure-blob-storage
+urlFragment: azreplicate
+---
+
 # AzReplicate <!-- omit in toc -->
 
 AzReplicate is a sample application designed to help Azure Storage customers preform very large, multi-petabyte data migrations to Azure Blob Storage. The sample was designed with a few key design objectives:
@@ -8,8 +22,16 @@ AzReplicate is a sample application designed to help Azure Storage customers pre
 - The system shall notify the source system after a file is copied.
 - The system shall provide scalable logging to allow for monitoring of the job and to provide an audit trail of the migration.
 
-## Contents <!-- omit in toc -->
+## Repository Contents
 
+| File/folder | Description |
+|-------------|-------------|
+| `samples` | This folder contains sample Sourcerer and Completer modules  |
+| `src`   | This folder constains the AzReplicate Core Module |
+
+## Read Me Contents <!-- omit in toc -->
+
+- [Repository Contents](#repository-contents)
 - [Problem Statement](#problem-statement)
   - [AzCopy](#azcopy)
   - [Azure Data Factory](#azure-data-factory)
@@ -34,7 +56,7 @@ Many customers need to perform large multi-petabyte scale migrations of data fro
 
 ## Overview of AzReplicate and how it works
 
-![AzReplicate Components](/docs/Components_300x436.png "AzReplicate Components")
+![AzReplicate Components](/media/Components_300x436.png "AzReplicate Components")
 
 <b>Sourcerer</b> - AzReplicate is a modular application that can copy any set of URL objects from a source URL to a destination blob inside an Azure Storage account.  The application requires a custom sourcerer which has the capability of queueing messages with source and destination endpoints for each object to be migrated.  
 
