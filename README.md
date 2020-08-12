@@ -12,7 +12,7 @@ products:
 urlFragment: azreplicate
 ---
 
-# AzReplicate <!-- omit in toc -->
+# AzReplicate <!-- omit in toc --> 
 
 AzReplicate is a sample application designed to help Azure Storage customers preform very large, multi-petabyte data migrations to Azure Blob Storage. The sample was designed with a few key design objectives:
 
