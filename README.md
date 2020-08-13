@@ -27,7 +27,7 @@ AzReplicate is a sample application designed to help Azure Storage customers pre
 | File/folder | Description |
 |-------------|-------------|
 | `samples` | This folder contains sample Sourcerer and Completer modules  |
-| `src`   | This folder constains the AzReplicate Core Module |
+| `src`   | This folder contains the AzReplicate Core Module |
 
 ## Read Me Contents <!-- omit in toc -->
 
@@ -56,7 +56,7 @@ Many customers need to perform large multi-petabyte scale migrations of data fro
 
 ## Overview of AzReplicate and how it works
 
-![AzReplicate Components](/media/Components_300x436.png "AzReplicate Components")
+![AzReplicate Components](https://github.com/Azure/AzReplicate/raw/master/media/Components_300x436.png "AzReplicate Components")
 
 <b>Sourcerer</b> - AzReplicate is a modular application that can copy any set of URL objects from a source URL to a destination blob inside an Azure Storage account.  The application requires a custom sourcerer which has the capability of queueing messages with source and destination endpoints for each object to be migrated.  
 
@@ -64,7 +64,7 @@ Many customers need to perform large multi-petabyte scale migrations of data fro
 
 <b>Completer</b> - Once objects are successfully written into Blob Storage a message is placed into a Done Queue for further processing.  This allows you to write code that can update the source system with the new location of the file. 
 
-> Please refer to the AzReplicate [sample documentation](./docs/samples.md) that includes examples of Sourcerer, Replicator and Completer modules.
+> Please refer to the AzReplicate [sample documentation](https://github.com/Azure/AzReplicate/blob/master/docs/samples.md) that includes examples of Sourcerer, Replicator and Completer modules.
 
 ## AzReplicate Components
 
@@ -90,11 +90,11 @@ When we use AzReplicate we deploy the containers using [Azure Container Instance
 
 ## Deploy AzReplicate
 
-[See instructions here](./docs/deploy.md)
+[See instructions here](https://github.com/Azure/AzReplicate/blob/master/docs/deploy.md)
 
 ## Monitoring AzReplicate
 
-[See instructions here](./docs/monitor.md)
+[See instructions here](https://github.com/Azure/AzReplicate/blob/master/docs/monitor.md)
 
 
 ## Contributing
