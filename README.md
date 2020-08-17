@@ -14,7 +14,7 @@ urlFragment: azreplicate
 
 # AzReplicate <!-- omit in toc --> 
 
-AzReplicate is a sample application designed to help Azure Storage customers preform very large, multi-petabyte data migrations to Azure Blob Storage. The sample was designed with a few key design objectives:
+AzReplicate is a sample application designed to help Azure Storage customers perform very large, multi-petabyte data migrations to Azure Blob Storage. The sample was designed with a few key design objectives:
 
 - The system shall scale to many multi-petabyte migrations.
 - The system shall allow for the source file location to be internet addressable store. This could be Azure Storage, another cloud storage provider, CDN, web server, etc.
