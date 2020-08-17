@@ -69,7 +69,7 @@ Many customers need to perform large multi-petabyte scale migrations of data fro
 ## AzReplicate Components
 
 - Source: Any HTTP/HTTPS source that supports anonymous or SAS requests. This could be Azure Storage, another cloud storage provider, CDN, Web Server, etc.
-  - The source system must support range lookups into the source objects.
+  - The source system must support head reqeusts and range lookups into the source objects.
 - Destination: Any Azure Storage Account
 - Sourcerer Module: An application that enqueues information about each object that need to be replicated. This application can read from a source system (database, etc), a CSV file, or even enumerate the files in a cloud storage account. Each message it enqueues contains at a minimum the source and target endpoints for one object that needs to be moved.
 - AzReplicate Replicator Engine Module: Reads the ToDo queue and tells Azure Storage to copy the file from the source to the destination. If the object less than 256 MB it is copied using the [Copy Blob From URL](https://docs.microsoft.com/rest/api/storageservices/copy-blob-from-url) API, otherwise the object is copied in blocks using the [Put Block From URL](https://docs.microsoft.com/rest/api/storageservices/put-block-from-url) API.
