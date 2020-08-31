@@ -52,7 +52,7 @@ $Env:AZURE_CORE_ONLY_SHOW_ERRORS = $True
 $Env:AZURE_CORE_OUTPUT = "tsv"
 
 # Set defaults in case not provided
-if ($SourcePath -eq $null -or $SourcePath -eq "") { $SourcePath = "./sample/AzReplicate.Sample/" }
+if ($SourcePath -eq $null -or $SourcePath -eq "") { $SourcePath = "./samples/" }
 if ($ReplicationQueueName -eq $null -or $ReplicationQueueName -eq "") { $ReplicationQueueName = "replication" }
 if ($AmountOfCoresPerContainer -eq 0) { $AmountOfCoresPerContainer = 2 }
 if ($AmountOfMemoryPerContainer -eq 0) { $AmountOfMemoryPerContainer = 4 }

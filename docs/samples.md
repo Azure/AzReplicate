@@ -14,8 +14,6 @@ We provide the following samples:
 - [Shard Blob Storage Sample](#shard-blob-storage-sample)
   - [Build and Publish, & Deploy the Blob Sourcerer](#build-and-publish--deploy-the-blob-sourcerer)
 
-
-
 ## Web App Sample
 
 This sample has a website with a MS SQL Database. The web app gets a list of image URLs to display from the database. Before the migration the images URLs are pointing to AWS S3. The migration copies the images to Azure and then updates the database with the new Azure Storage URLs. 
@@ -26,7 +24,7 @@ The first part of this sample is a simple .NET website, hosted on Azure App Serv
 ```PowerShell
 ./samples/AzReplicate.Sample.WebApp/Deploy-Sample-WebApp.ps1 `
     -SubscriptionId $subscriptionId `
-    -Region $regionName `
+    -Region $Region `
     -ResourceGroup $resourceGroup `
     -DBServerName $dbServer <# the name of the SQL server you want to create, be sure to pick something unique and that follows naming rules #> `
     -DBName $dbname <# the name of the database on the SQL Server to create #> `
@@ -34,7 +32,7 @@ The first part of this sample is a simple .NET website, hosted on Azure App Serv
     -DBUserPwd $dbpwd <# the password of the sql server admin #> `
     -AppServicePlan $appsvcplan <# the app service plan name to create #> `
     -WebAppName $webapp <# the web app to create, be sure to pick something unique and that follows naming rules #> `
-    -AppDirectory "./sample/AzReplicate.Sample/AzReplicate.Sample.WebApp/" <# the relative path to where the sample .NET code for the website lives on your computer #>
+    -AppDirectory "./samples/AzReplicate.Sample.WebApp/" <# the relative path to where the sample .NET code for the website lives on your computer #>
 ```
 
 After you execute this script you can open a browser to the sample application by going to https://yourwebappname.azurewebsites.net. You will not see any images till you press the "Reset" link at the top of the page. This will go out and get 50 sample records, save them to the database and refresh the page.
@@ -48,9 +46,9 @@ The [Deploy-Sample-WebApp-Sourcerer](./samples/AzReplicate.Sample.WebAppSourcere
 ```PowerShell
 ./samples/AzReplicate.Sample.WebAppSourcerer/Deploy-Sample-WebApp-Sourcerer.ps1 `
     -SubscriptionId $subscriptionId `
-    -Region $regionName `
+    -Region $Region `
     -ResourceGroup $resourceGroup `
-    -SourcePath "./sample/AzReplicate.Sample/" `
+    -SourcePath "./samples/" `
     -TargetStorageAccountName $storageAccount <# Target storage account for the queue and the objects #> `
     -TargetStorageAccountContainerName data <# Name of the container in the target storage account #> `
     -ReplicationQueueName replication <# Name of the queue in the target storage account #> `
@@ -58,7 +56,7 @@ The [Deploy-Sample-WebApp-Sourcerer](./samples/AzReplicate.Sample.WebAppSourcere
     -DBName $dbname <# the name of the database on the SQL Server to use #> `
     -DBUserName $dbuser <# the username of the sql server admin #> `
     -DBUserPwd $dbpwd <# the password of the sql server admin #> `
-    -ContainerRegistry $acrName <# the ACR that the container was published to #> `
+    -ContainerRegistry $ContainerRegistry <# the ACR that the container was published to #> `
     -AmountOfCoresPerContainer 1 <# the number of cores for the running container #> `
     -AmountOfMemoryPerContainer 1 <# the GB of memory for the running container #>
 ```
@@ -70,16 +68,16 @@ The [Deploy-Sample-WebApp-Completer](./samples/AzReplicate.Sample.WebAppComplete
 ```PowerShell
 ./samples/AzReplicate.Sample.WebAppCompleter/Deploy-Sample-WebApp-Completer.ps1 `
     -SubscriptionId $subscriptionId `
-    -Region $regionName `
+    -Region $Region `
     -ResourceGroup $resourceGroup `
-    -SourcePath "./sample/AzReplicate.Sample/" `
+    -SourcePath "./samples/" `
     -TargetStorageAccountName $storageAccount <# Target storage account for the queue and the objects #> `
     -CompleterQueueName completion <# Name of the queue in the target storage account #> `
     -DBServerName $dbserver <# the name of the SQL server you want to use #> `
     -DBName $dbname <# the name of the database on the SQL Server to use #> `
     -DBUserName $dbuser <# the username of the sql server admin #> `
     -DBUserPwd $dbpwd <# the password of the sql server admin #> `
-    -ContainerRegistry $acrName <# the ACR that the container was published to #> `
+    -ContainerRegistry $ContainerRegistry <# the ACR that the container was published to #> `
     -AmountOfCoresPerContainer 1 <# the number of cores for the running container #> `
     -AmountOfMemoryPerContainer 1 <# the GB of memory for the running container #>
 ```
@@ -94,7 +92,7 @@ This sample copies the data in one Azure Storage account to 1 or more Azure Stor
 ```PowerShell
 ./samples/AzReplicate.Sample.AzBlobSourcerer/Deploy-Sample-AzBlob-Sourcerer.ps1 `
     -SubscriptionId $subscriptionId `
-    -Region $regionName `
+    -Region $Region `
     -ResourceGroup $resourceGroup `
     -SourcePath "./src/AzReplicate.Sample/" `
     -SourceStorageAccountResourceGroup "sourcerg" <# source storage account resource group for the objects #> `
@@ -102,7 +100,7 @@ This sample copies the data in one Azure Storage account to 1 or more Azure Stor
     -DestinationStorageAccountNames "dest1,dest2" <# Name of the destination storage accounts comma separated #> `
     -ReplicationQueueAccountName "dest1" <# Name of the queue to use for replication #> `
     -ReplicationQueueName replication <# Name of the queue to use for replication #> `
-    -ContainerRegistry $acrName <# the ACR that the container was published to #> `
+    -ContainerRegistry $ContainerRegistry <# the ACR that the container was published to #> `
     -AmountOfCoresPerContainer 1 <# the number of cores for the running container #> `
     -AmountOfMemoryPerContainer 1 <# the GB of memory for the running container #>
 ```
